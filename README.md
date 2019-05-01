@@ -1,7 +1,15 @@
-# Magisk Module Template
+# ONEPLUS 3/3T SLOW MOTION FIX
 
-**Update `README.md` if you want to submit your module to the online repo!** This `README.md` will be shown in a Webview dialog when a user taps your module in Magisk Manager, so make sure to place some information / changelog / notes here.
+# What does this module do?
 
-If you are not familiar with the Markdown syntax, you can start by experimenting on GitHub's online Markdown editor, which will let you preview before publishing. If you need more help, the [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) will be handy.
+It fixes slow motion by using the libraries containing Oxygen OS Nougat Camera Hal. This will solve the force close when attempting to use slow motion with Google Camera, Snap Camera, Open Camera and similar.
 
-For more information about modules and repos, please check the [official documentation](https://topjohnwu.github.io/Magisk/)
+# What Roms is it compatible with?
+
+Every Oreo/Pie-based Rom (including Oxygen OS of course).
+
+# Who did this?
+
+[3liteking148](https://forum.xda-developers.com/member.php?u=7606633) is the one who made this possible.
+
+[MarcAnt01](https://github.com/MarcAnt01) updated to new Magisk installer, added device check and other minor stuff.
