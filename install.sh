@@ -134,6 +134,9 @@ on_install() {
   # Extend/change the logic to whatever you want
   ui_print "- Extracting module files"
   unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
+  custom_variables
+  device_check
+  api_check
 }
 
 # Only some special files require specific permissions
@@ -152,3 +155,24 @@ set_permissions() {
 }
 
 # You can add more functions to assist your custom script code
+
+custom_variables() {
+if [ -f vendor/build.prop ]; then BUILDS="/system/build.prop vendor/build.prop"; else BUILDS="/system/build.prop"; fi
+  OP3=$(grep -E "ro.product.device=oneplus3" "$BUILDS")
+}
+
+device_check() {
+  if [ -n "$OP3" ]; then
+    break
+  else
+    abort "Your device is not a OnePlus 3/3T or you are using a modified build.prop"
+  fi
+}
+
+api_check() {
+  if [ "$API" -ge 26 ]; then
+    break
+  else
+    abort "Your Android version doesn't require this fix"
+  fi
+}
