@@ -16,14 +16,15 @@ Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
 # Changelog
 
+### V 1.2
+
+- Fixed some issues in Custom Roms with SELinux enforcing;
+- Fixed issues with device check on Oxygen OS.
+
 ### V 1.1
 
-Fixed non working slowmo on Customs Roms with SELinux enforcing.
+Initial release for Magisk Repo
 
 ### V 1.0
 
 Initial release
-
-# Known issues
-
-With some Pie Custom Roms that have SELinux enforcing (LOS 16, Havoc OS), the module slows down the camera apps.
