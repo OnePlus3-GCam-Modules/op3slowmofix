@@ -158,7 +158,7 @@ set_permissions() {
 
 custom_variables() {
 if [ -f vendor/build.prop ]; then BUILDS="/system/build.prop vendor/build.prop"; else BUILDS="/system/build.prop"; fi
-  OP3=$(grep -E "ro.product.device=oneplus3" "$BUILDS")
+  OP3=$(grep -E "ro.product.device=oneplus3|ro.product.device=OnePlus3|ro.product.device=OnePlus3T" $BUILDS)
 }
 
 device_check() {
