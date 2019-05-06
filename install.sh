@@ -144,14 +144,20 @@ on_install() {
 # The default permissions should be good enough for most cases
 
 set_permissions() {
-  # The following is the default rule, DO NOT remove
-  set_perm_recursive $MODPATH 0 0 0755 0644
-
   # Here are some examples:
   # set_perm_recursive  $MODPATH/system/lib       0     0       0755      0644
   # set_perm  $MODPATH/system/bin/app_process32   0     2000    0755      u:object_r:zygote_exec:s0
   # set_perm  $MODPATH/system/bin/dex2oat         0     2000    0755      u:object_r:dex2oat_exec:s0
   # set_perm  $MODPATH/system/lib/libart.so       0     0       0644
+  
+  # The following is default permissions, DO NOT remove
+  set_perm_recursive  $MODPATH  0  0  0755  0644
+  set_perm  $MODPATH/system/vendor/bin/mm-qcamera-daemon  0  0  0755 u:object_r:mm-qcamerad_exec:s0
+  set_perm  $MODPATH/system/vendor/bin/hw/android.hardware.camera.provider@2.4-service.oneplus3  0  0  0755 u:object_r:hal_camera_default_exec:s0
+
+  # Create symlink for ROMs based on LOS 16 device tree
+  ln -s /system/lib/vendor.qti.hardware.camera.device@1.0.so $MODPATH/system/vendor/lib/vendor.qti.hardware.camera.device@1.0_vendor.so
+  ln -s /system/lib64/vendor.qti.hardware.camera.device@1.0.so $MODPATH/system/vendor/lib64/vendor.qti.hardware.camera.device@1.0_vendor.so
 }
 
 # You can add more functions to assist your custom script code
