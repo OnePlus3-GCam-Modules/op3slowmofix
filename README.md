@@ -16,6 +16,9 @@ Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
 # Changelog
 
+## V 1.3
+Fixed further issues with Custom Roms with Lineage OS device trees
+
 ### V 1.2
 
 - Fixed some issues in Custom Roms with SELinux enforcing;
