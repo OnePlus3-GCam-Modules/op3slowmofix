@@ -16,7 +16,11 @@ Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
 # Changelog
 
-## V 1.3
+### V 1.4
+
+Changed boot script logic to support Havoc OS
+
+### V 1.3
 Fixed further issues with Custom Roms with Lineage OS device trees
 
 ### V 1.2
