@@ -134,11 +134,11 @@ on_install() {
   # Extend/change the logic to whatever you want
   ui_print "- Extracting module files"
   unzip -o "$ZIPFILE" 'op3slowmo.sh' 'system/*' -d $MODPATH >&2
-  cp -rf $MODPATH/op3slowmo.sh /data/adb/service.d/
-  chmod 755 /data/adb/service.d/op3slowmo.sh
   custom_variables
   device_check
   api_check
+  cp -rf $MODPATH/op3slowmo.sh /data/adb/service.d/
+  chmod 755 /data/adb/service.d/op3slowmo.sh
 }
 
 # Only some special files require specific permissions
