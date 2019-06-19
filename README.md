@@ -14,6 +14,8 @@ Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
 [MarcAnt01](https://github.com/MarcAnt01) updated to new Magisk installer, added device check and other minor stuff.
 
+[crashoverride1995](https://github.com/crashoverride1995) helped with boot scripts and various fixes
+
 # Changelog
 
 ### V 1.4
