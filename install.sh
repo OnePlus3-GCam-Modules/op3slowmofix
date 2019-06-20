@@ -169,12 +169,13 @@ set_permissions() {
 custom_variables() {
 if [ -f vendor/build.prop ]; then BUILDS="/system/build.prop vendor/build.prop"; else BUILDS="/system/build.prop"; fi
   OP3=$(grep -E "ro.product.device=oneplus3|ro.product.device=OnePlus3|ro.product.device=OnePlus3T" $BUILDS)
+  OP3OmniRom=$(grep -E "ro.omni.device=oneplus3" $BUILDS)
 }
 
 # this function allows installation just on OP3/3T
 
 device_check() {
-  if [ -n "$OP3" ]; then
+  if [ -n "$OP3" ] || [ -n "$OP3OmniRom" ]; then
     break
   else
     abort "Your device is not a OnePlus 3/3T or you are using a modified build.prop"
