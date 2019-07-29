@@ -132,11 +132,11 @@ print_modname() {
 on_install() {
   # The following is the default implementation: extract $ZIPFILE/system to $MODPATH
   # Extend/change the logic to whatever you want
-  ui_print "- Extracting module files"
-  unzip -o "$ZIPFILE" 'op3slowmo.sh' 'system/*' -d $MODPATH >&2
   custom_variables
   device_check
   api_check
+  ui_print "- Extracting module files"
+  unzip -o "$ZIPFILE" 'op3slowmo.sh' 'system/*' -d $MODPATH >&2
   cp -f $MODPATH/op3slowmo.sh /data/adb/service.d/
   chmod 755 /data/adb/service.d/op3slowmo.sh
 }
@@ -167,8 +167,22 @@ set_permissions() {
 # this function associates the device model to OP3/3T allowing the installation
 
 custom_variables() {
-if [ -f vendor/build.prop ]; then BUILDS="/system/build.prop vendor/build.prop"; else BUILDS="/system/build.prop"; fi
-  OP3=$(grep -E "ro.product.device=oneplus3|ro.product.device=OnePlus3|ro.product.device=OnePlus3T" $BUILDS)
+
+if $BOOTMODE; then ORIGDIR="/sbin/.magisk/mirror"; fi
+if $BOOTMODE; then
+  if [ -f $ORIGDIR/vendor/build.prop ]; then 
+    BUILDS="$ORIGDIR/system/build.prop $ORIGDIR/vendor/build.prop"
+  else 
+    BUILDS="$OROGDIR/system/build.prop"
+  fi
+else
+  if [ -f /vendor/build.prop ]; then 
+    BUILDS="/system/build.prop /vendor/build.prop"
+  else 
+    BUILDS="/system/build.prop"
+  fi
+fi
+  OP3=$(grep -E "ro.build.product=OnePlus3*|ro.build.product=oneplus3*|ro.vendor.product.device=oneplus3*|ro.vendor.product.device=OnePlus3*" $BUILDS)
   OP3OmniRom=$(grep "ro.omni.device=oneplus3" $BUILDS)
 }
 
