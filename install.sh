@@ -167,7 +167,6 @@ set_permissions() {
 # this function associates the device model to OP3/3T allowing the installation
 
 custom_variables() {
-
 if $BOOTMODE; then ORIGDIR="/sbin/.magisk/mirror"; fi
 if $BOOTMODE; then
   if [ -f $ORIGDIR/vendor/build.prop ]; then 
@@ -183,14 +182,14 @@ else
   fi
 fi
   OP3=$(grep -E "ro.build.product=OnePlus3*|ro.build.product=oneplus3*|ro.vendor.product.device=oneplus3*|ro.vendor.product.device=OnePlus3*" $BUILDS)
-  OP3OmniRom=$(grep "ro.omni.device=oneplus3" $BUILDS)
+  OP3OmniRom=$(grep "ro.omni.device=oneplus3*" $BUILDS)
 }
 
 # this function allows installation just on OP3/3T
 
 device_check() {
   if [ ! "$OP3" ] || [ ! "$OP3OmniRom" ]; then
-    abort "Your device is not a OnePlus 3/3T or you are using a modified build.prop"
+    cancel "Your device is not a OnePlus 3/3T or you are using a modified build.prop"
   fi
 }
 
