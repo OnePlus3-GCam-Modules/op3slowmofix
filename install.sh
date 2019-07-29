@@ -137,7 +137,7 @@ on_install() {
   custom_variables
   device_check
   api_check
-  cp -rf $MODPATH/op3slowmo.sh /data/adb/service.d/
+  cp -f $MODPATH/op3slowmo.sh /data/adb/service.d/
   chmod 755 /data/adb/service.d/op3slowmo.sh
 }
 
@@ -169,15 +169,13 @@ set_permissions() {
 custom_variables() {
 if [ -f vendor/build.prop ]; then BUILDS="/system/build.prop vendor/build.prop"; else BUILDS="/system/build.prop"; fi
   OP3=$(grep -E "ro.product.device=oneplus3|ro.product.device=OnePlus3|ro.product.device=OnePlus3T" $BUILDS)
-  OP3OmniRom=$(grep -E "ro.omni.device=oneplus3" $BUILDS)
+  OP3OmniRom=$(grep "ro.omni.device=oneplus3" $BUILDS)
 }
 
 # this function allows installation just on OP3/3T
 
 device_check() {
-  if [ -n "$OP3" ] || [ -n "$OP3OmniRom" ]; then
-    break
-  else
+  if [ ! "$OP3" ] || [ ! "$OP3OmniRom" ]; then
     abort "Your device is not a OnePlus 3/3T or you are using a modified build.prop"
   fi
 }
@@ -185,9 +183,12 @@ device_check() {
 # this function allows installation just with API level that matches the requisites
 
 api_check() {
-  if [ "$API" -ge 26 ]; then
-    break
-  else
-    abort "Your Android version doesn't require this fix"
+  if [ "$API" -le 26 ]; then
+    cancel "Your Android version doesn't require this fix"
   fi
+}
+
+cancel() {
+  imageless_magisk || unmount_magisk_image
+  abort "$1"
 }
