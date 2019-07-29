@@ -180,9 +180,6 @@ else
   else 
     BUILDS="/system/build.prop"
   fi
-fi
-  OP3=$(grep -E "ro.build.product=OnePlus3*|ro.build.product=oneplus3*|ro.product.vendor.device=oneplus3*|ro.product.vendor.device=OnePlus3*" $BUILDS)
-  OP3OmniRom=$(grep "ro.omni.device=oneplus3*" $BUILDS)
 }
 
 # this function allows installation just on OP3/3T
