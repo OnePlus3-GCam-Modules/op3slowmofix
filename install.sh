@@ -169,13 +169,13 @@ set_permissions() {
 custom_variables() {
 if $BOOTMODE; then ORIGDIR="/sbin/.magisk/mirror"; fi
 if $BOOTMODE; then
-  if [ -f $ORIGDIR/vendor/build.prop ]; then 
+  if [ -f "$ORIGDIR/vendor/build.prop" ]; then 
     BUILDS="$ORIGDIR/system/build.prop $ORIGDIR/vendor/build.prop"
   else 
     BUILDS="$OROGDIR/system/build.prop"
   fi
 else
-  if [ -f /vendor/build.prop ]; then 
+  if [ -f "/vendor/build.prop" ]; then 
     BUILDS="/system/build.prop /vendor/build.prop"
   else 
     BUILDS="/system/build.prop"
@@ -183,14 +183,9 @@ else
 fi
 }
 
-cancel() {
-  imageless_magisk || unmount_magisk_image
-  abort "$1"
-}
-
 prop_check() {
   local PROP=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-  for i in "ro.product.device" "ro.build.product"; do
+  for i in "ro.product.device" "ro.build.product" "ro.omni.device"; do
     [ "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" -o "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" ] && return 0
   done
   return 1
@@ -199,7 +194,7 @@ prop_check() {
 # this function allows installation just on OP3/3T
 
 device_check() {
-  if ! prop_check oneplus3*; then
+  if ! prop_check "oneplus3" || ! prop_check "oneplus3t"; then
     cancel "Your device is not a OnePlus 3/3T or you are using a modified build.prop"
   fi
 }
@@ -207,7 +202,13 @@ device_check() {
 # this function allows installation just with API level that matches the requisites
 
 api_check() {
-  if [ "$API" -le 26 ]; then
+  if [ $API -le 26 ]; then
     cancel "Your Android version doesn't require this fix"
   fi
 }
+
+cancel() {
+  imageless_magisk || unmount_magisk_image
+  abort "$1"
+}
+
