@@ -167,7 +167,7 @@ set_permissions() {
 # this function associates the device model to OP3/3T allowing the installation
 
 custom_variables() {
-if [ -f vendor/build.prop ]; then BUILDS="/system/build.prop vendor/build.prop"; else BUILDS="/system/build.prop"; fi
+if [ -f vendor/build.prop ]; then BUILDS="/system/build.prop /vendor/build.prop"; else BUILDS="/system/build.prop"; fi
   OP3=$(grep -E "ro.product.device=oneplus3|ro.product.device=OnePlus3|ro.product.device=OnePlus3T" $BUILDS)
   OP3OmniRom=$(grep "ro.omni.device=oneplus3" $BUILDS)
 }
