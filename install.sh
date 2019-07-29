@@ -181,14 +181,14 @@ else
     BUILDS="/system/build.prop"
   fi
 fi
-  OP3=$(grep -E "ro.build.product=OnePlus3*|ro.build.product=oneplus3*|ro.vendor.product.device=oneplus3*|ro.vendor.product.device=OnePlus3*" $BUILDS)
+  OP3=$(grep -E "ro.build.product=OnePlus3*|ro.build.product=oneplus3*|ro.product.vendor.device=oneplus3*|ro.product.vendor.device=OnePlus3*" $BUILDS)
   OP3OmniRom=$(grep "ro.omni.device=oneplus3*" $BUILDS)
 }
 
 # this function allows installation just on OP3/3T
 
 device_check() {
-  if [ ! "$OP3" ] || [ ! "$OP3OmniRom" ]; then
+  if ! prop_check oneplus3*; then
     cancel "Your device is not a OnePlus 3/3T or you are using a modified build.prop"
   fi
 }
@@ -204,4 +204,12 @@ api_check() {
 cancel() {
   imageless_magisk || unmount_magisk_image
   abort "$1"
+}
+
+prop_check() {
+  local PROP=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+  for i in "ro.product.device" "ro.build.product"; do
+    [ "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" -o "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" ] && return 0
+  done
+  return 1
 }
