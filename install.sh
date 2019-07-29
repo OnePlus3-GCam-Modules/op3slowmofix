@@ -180,6 +180,20 @@ else
   else 
     BUILDS="/system/build.prop"
   fi
+fi
+}
+
+cancel() {
+  imageless_magisk || unmount_magisk_image
+  abort "$1"
+}
+
+prop_check() {
+  local PROP=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+  for i in "ro.product.device" "ro.build.product"; do
+    [ "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" -o "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" ] && return 0
+  done
+  return 1
 }
 
 # this function allows installation just on OP3/3T
@@ -196,17 +210,4 @@ api_check() {
   if [ "$API" -le 26 ]; then
     cancel "Your Android version doesn't require this fix"
   fi
-}
-
-cancel() {
-  imageless_magisk || unmount_magisk_image
-  abort "$1"
-}
-
-prop_check() {
-  local PROP=$(echo "$1" | tr '[:upper:]' '[:lower:]')
-  for i in "ro.product.device" "ro.build.product"; do
-    [ "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" -o "$(sed -n "s/^$i=//p" $BUILDS 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$PROP" ] && return 0
-  done
-  return 1
 }
