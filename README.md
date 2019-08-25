@@ -16,6 +16,10 @@ Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
 [crashoverride1995](https://github.com/crashoverride1995) helped with boot scripts and various fixes
 
+# Special thanks
+
+[Zackptg5](https://github.com/Zackptg5) and [topjohnwu](https://github.com/topjohnwu) for the template
+
 # Changelog
 
 ### V 2.0
