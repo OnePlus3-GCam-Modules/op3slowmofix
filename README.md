@@ -18,6 +18,9 @@ Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
 # Changelog
 
+### V 2.0
+Module rebased on Unity template (now it supports other root solutions like SuperSU and rootless solution, in this case you might need [Init.d Injector](https://forum.xda-developers.com/android/software-hacking/mod-universal-init-d-injector-wip-t3692105))
+
 ### V 1.5
 
 Various bug fixes
