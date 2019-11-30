@@ -106,8 +106,10 @@ unzip -o "$ZIPFILE" 'op3slowmo.sh' 'system/*' -d $MODPATH >&2
 device_check "oneplus3"|"OnePlus3"|"OnePlus3T"
 
 api_check() {
-  if [ "$API" -ge 26 ]; then
+  if [ $API -ge 26 ] && [ $API -lt 29 ]; then
     break
+  elif [ $API -eq 29 ]; then
+    abort "Android 10 isn't supported yet"
   else
     abort "Your Android version doesn't require this fix"
   fi
