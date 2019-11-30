@@ -8,6 +8,8 @@ It fixes slow motion by using the libraries containing Oxygen OS Nougat Camera H
 
 Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
+At the moment it isn't working with Android 10, check [here](https://github.com/Magisk-Modules-Repo/op3slowmofix/issues/7) to know why.
+
 # Who did this?
 
 [3liteking148](https://forum.xda-developers.com/member.php?u=7606633) is the one who made this possible.
@@ -22,7 +24,12 @@ Every Oreo/Pie-based Rom (including Oxygen OS of course).
 
 # Changelog
 
+### V 2.0.1
+
+Block the installation on Android Pie
+
 ### V 2.0
+
 Module rebased on Unity template (now it supports other root solutions like SuperSU and rootless solution, in this case you might need [Init.d Injector](https://forum.xda-developers.com/android/software-hacking/mod-universal-init-d-injector-wip-t3692105))
 
 ### V 1.5
