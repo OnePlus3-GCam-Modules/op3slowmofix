@@ -26,7 +26,7 @@ At the moment it isn't working with Android 10, check [here](https://github.com/
 
 ### V 2.0.1
 
-Block the installation on Android Pie
+Block the installation on Android 10
 
 ### V 2.0
 
